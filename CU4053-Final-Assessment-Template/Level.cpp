@@ -8,6 +8,9 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs,sf::View* v, World
 	world = w;	
 	tileManager = tm;
 	audioManager = new AudioManager();
+
+	world->AddGameObject(player);
+	player.setInput(in);
 }
 
 Level::~Level()
@@ -36,24 +39,26 @@ void Level::handleInput(float dt)
 		input->setKeyUp(sf::Keyboard::Tab);
 		gameState->setCurrentState(State::TILEEDITOR);
 	}
+	player.handleInput(dt);
 }
 
 // Update game objects
 void Level::update(float dt)
 {
-
 	//Move the view to follow the player
-	//view->setCenter(view->getCenter().x, 360);
-	//
-	//sf::Vector2f playerPosition = player.getPosition();
-	//float newX = std::max(playerPosition.x, view->getSize().x / 2.0f);
-	//view->setCenter(newX, view->getCenter().y);
-	//window->setView(*view);
+	view->setCenter(view->getCenter().x, 360);
+	
+	sf::Vector2f playerPosition = player.getPosition();
+	float newX = std::max(playerPosition.x, view->getSize().x / 2.0f);
+	view->setCenter(newX, view->getCenter().y);
+	window->setView(*view);
 }
 
 // Render level
 void Level::render()
 {
+
+	window->draw(player);
 	if (gameState->getCurrentState() == State::LEVEL)
 	{
 		tileManager->render(false);
