@@ -10,6 +10,8 @@
 #include <string>
 #include <iostream>
 #include "Mario.h"
+#include "Background.h"
+#include "Enemy.h"
 class Level : public BaseLevel{
 public:
 	Level(sf::RenderWindow* hwnd, Input* in, GameState* gs,sf::View* view ,World* w, TileManager* tm);
@@ -23,4 +25,11 @@ private:
 	// Default variables for level class.
 
 	Mario player;
+
+	Background bg;
+	Enemy enemyArray[5];
+
+	sf::Text CollectablesCollectedText;
+	sf::Font font;
+
 };

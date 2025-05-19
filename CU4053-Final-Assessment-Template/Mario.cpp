@@ -23,8 +23,14 @@ Mario::Mario()
 	Duck.setFrameSpeed(1.f / 2.f);
 	currentAnimation = &Walk;
 
-}
+	setTag("Player");
+	health = 100;
 
+}
+void Mario::ReduceHealth(float h)
+{
+	health -= h;
+}
 void Mario::handleInput(float dt)
 {
 	velocity.x = 0.f;
@@ -59,6 +65,46 @@ void Mario::handleInput(float dt)
 	if (input->isKeyDown(sf::Keyboard::W) && canJump)
 	{
 		Jump(160.f);
+	}
+
+
+	if (input->isKeyDown(sf::Keyboard::E))
+	{
+		input->setKeyUp(sf::Keyboard::E);
+		// Create a new projectile
+		Projectiles* bullet = new Projectiles();
+		if (currentAnimation->getFlipped() == false) {
+			sf::Vector2f BulletPos = getPosition() - sf::Vector2f(-120, 0);
+			bullet->setPosition(BulletPos);
+		}
+		else if (currentAnimation->getFlipped() == true) {
+			sf::Vector2f BulletPos = getPosition() + sf::Vector2f(0, 0);
+			bullet->setPosition(BulletPos);
+		}
+		// Calculate the position of the mouse
+		sf::Vector2f MousePos = sf::Vector2f(input->getMouseX(), input->getMouseY());
+
+		// Calculate the direction from the bullet's position to the mouse position
+		sf::Vector2f direction = MousePos - getPosition();
+
+		// Normalize the direction vector
+		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+		sf::Vector2f normalizedDirection = direction / magnitude;
+
+		// Set the velocity of the bullet to be in the direction of the mouse
+		// Adjust the speed as needed by multiplying the normalized direction by the desired speed
+		if (currentAnimation->getFlipped() == true) {
+			bullet->setVelocity(-1000, 0); // You can adjust the speed by changing 1000.f
+		}
+		else if (currentAnimation->getFlipped() == false) {
+			bullet->setVelocity(1000, 0);
+		}
+
+		// Add the bullet to the list of bullets
+		bullets.push_back(bullet);
+
+		// Add the bullet to the world
+		world->AddGameObject(*bullet);
 	}
 	currentAnimation->animate(dt);
 	
