@@ -41,7 +41,7 @@ void Mario::handleInput(float dt)
 		currentAnimation = &Walk;
 		currentAnimation->setFlipped(false);
 	}
-	else if (input->isKeyDown(sf::Keyboard::Down))
+	else if (input->isKeyDown(sf::Keyboard::C))
 	{
 		currentAnimation = &Duck;
 	}
