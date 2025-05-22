@@ -62,7 +62,7 @@ void Mario::handleInput(float dt)
 		currentAnimation->reset();
 		currentAnimation = &Walk;
 	}
-	if (input->isKeyDown(sf::Keyboard::W) && canJump)
+	if (input->isKeyDown(sf::Keyboard::Space) && canJump)
 	{
 		Jump(160.f);
 	}

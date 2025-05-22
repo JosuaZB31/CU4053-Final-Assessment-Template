@@ -27,7 +27,7 @@ private:
 	Mario player;
 
 	Background bg;
-	Enemy enemyArray[5];
+	Enemy enemyArray[17];
 
 	sf::Text CollectablesCollectedText;
 	sf::Font font;

@@ -1,12 +1,12 @@
 #include "Level.h"
 #include "Framework/Utilities.h"
-Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs,sf::View* v, World* w, TileManager* tm)
+Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, sf::View* v, World* w, TileManager* tm)
 {
 	window = hwnd;
 	input = in;
 	gameState = gs;
 	view = v;
-	world = w;	
+	world = w;
 	tileManager = tm;
 	audioManager = new AudioManager();
 
@@ -26,11 +26,24 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs,sf::View* v, World
 	player.setWorld(w);
 
 	//sets up enemy locations
-	enemyArray[0].setPosition(500, 100);
-	enemyArray[1].setPosition(700, 100);
-	enemyArray[2].setPosition(900, 100);
+	enemyArray[0].setPosition(1638, 384);
+	enemyArray[1].setPosition(2363, 390);
+	enemyArray[2].setPosition(3740, -275);
 	enemyArray[3].setPosition(9800, 608);
-	enemyArray[4].setPosition(6560, 1038);
+	enemyArray[4].setPosition(3986, -275);
+	enemyArray[5].setPosition(5955, -210);
+	enemyArray[6].setPosition(6729, -285);
+	enemyArray[7].setPosition(6767, 175);
+	enemyArray[8].setPosition(7773, 212);
+	enemyArray[9].setPosition(8628, 275);
+	enemyArray[10].setPosition(9149, 947);
+	enemyArray[11].setPosition(10171, 450);
+	enemyArray[12].setPosition(10883, 643);
+	enemyArray[13].setPosition(14650, -3);
+	enemyArray[14].setPosition(15670, 39);
+	enemyArray[15].setPosition(16180, 305);
+	enemyArray[16].setPosition(16562, 341);
+	enemyArray[17].setPosition(16363, -230);
 	//adds enemies to world
 	for (int i = 0; i < 5; i++) {
 		world->AddGameObject(enemyArray[i]);
